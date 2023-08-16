@@ -1,22 +1,22 @@
 @font-face {
     font-family: 'Black';
-    src: url('../public/static/NotoSansArabic-Black.ttf');
+    src: url('../public/static/IBMPlexArabic-Bold.ttf');
 }
 @font-face {
     font-family: 'Bold';
-    src: url('../public/static/NotoSansArabic-Bold.ttf');
+    src: url('../public/static/IBMPlexArabic-SemiBold.ttf');
 }
 @font-face {
     font-family: 'Medium';
-    src: url('../public/static/NotoSansArabic-Medium.ttf');
+    src: url('../public/static/IBMPlexArabic-Medium.ttf');
 }
 @font-face {
     font-family: 'Regular';
-    src: url('../public/static/NotoSansArabic-Regular.ttf');
+    src: url('../public/static/IBMPlexArabic-Regular.ttf');
 }
 @font-face {
     font-family: 'Thin';
-    src: url('../public/static/NotoSansArabic-Thin.ttf');
+    src: url('../public/static/IBMPlexArabic-Thin.ttf');
 }
 
 $colorBlack1: #2A304066;
@@ -314,10 +314,11 @@ main{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 120px;
     .hd{
         position: relative;
         height: 380px;
-        >img{
+        .map{
             width: 100%;
         }
         .conteiner{
@@ -458,6 +459,7 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 120px;
 
     .hd{
         .conteiner{
@@ -507,12 +509,10 @@ main{
     }
     img{
         position: absolute;
-        width: 50%;
+        width: 30%;
         top: 48%;
-        left: 25%;
+        left: 35%;
         z-index: 2;
-
-
     }
 }
 
@@ -762,6 +762,7 @@ main{
                     position: absolute;
                     z-index: 3;
                     left: 15%;
+                    transition: 0.5s;
                 }
                 .txtPer{
                     text-align: center;
@@ -778,6 +779,11 @@ main{
                     bottom:20px;
                     font-size: 18pt;
 
+                }
+                &:hover{
+                    .icons{
+                        transform: scale(1.08);
+                    }
                 }
             }
         }

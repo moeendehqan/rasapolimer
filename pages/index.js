@@ -4,7 +4,6 @@ import VideoPlayer from './componets/videoPlayer'
 import About_us from './componets/about_us'
 import Products from './componets/Products'
 import Contact_us from './componets/contact us'
-import Services from './componets/servise'
 
 
 export default function Home() {
@@ -22,7 +21,6 @@ export default function Home() {
         <About_us />
         <Products />
         <Contact_us />
-        <Services />
       </main>
 
 

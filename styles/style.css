@@ -1,22 +1,22 @@
 @font-face {
   font-family: "Black";
-  src: url("../public/static/NotoSansArabic-Black.ttf");
+  src: url("../public/static/IBMPlexArabic-Bold.ttf");
 }
 @font-face {
   font-family: "Bold";
-  src: url("../public/static/NotoSansArabic-Bold.ttf");
+  src: url("../public/static/IBMPlexArabic-SemiBold.ttf");
 }
 @font-face {
   font-family: "Medium";
-  src: url("../public/static/NotoSansArabic-Medium.ttf");
+  src: url("../public/static/IBMPlexArabic-Medium.ttf");
 }
 @font-face {
   font-family: "Regular";
-  src: url("../public/static/NotoSansArabic-Regular.ttf");
+  src: url("../public/static/IBMPlexArabic-Regular.ttf");
 }
 @font-face {
   font-family: "Thin";
-  src: url("../public/static/NotoSansArabic-Thin.ttf");
+  src: url("../public/static/IBMPlexArabic-Thin.ttf");
 }
 * {
   margin: 0px;
@@ -279,12 +279,13 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 120px;
 }
 .contact_us .hd {
   position: relative;
   height: 380px;
 }
-.contact_us .hd > img {
+.contact_us .hd .map {
   width: 100%;
 }
 .contact_us .hd .conteiner {
@@ -412,6 +413,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 120px;
 }
 .services .hd .conteiner p {
   background: rgba(255, 211, 100, 0.6980392157) !important;
@@ -453,9 +455,9 @@ main {
 }
 .video img {
   position: absolute;
-  width: 50%;
+  width: 30%;
   top: 48%;
-  left: 25%;
+  left: 35%;
   z-index: 2;
 }
 
@@ -712,6 +714,7 @@ main {
   position: absolute;
   z-index: 3;
   left: 15%;
+  transition: 0.5s;
 }
 .SolutionsPg section .bx-cntnr .bx .txtPer {
   text-align: center;
@@ -726,6 +729,9 @@ main {
   position: absolute;
   bottom: 20px;
   font-size: 18pt;
+}
+.SolutionsPg section .bx-cntnr .bx:hover .icons {
+  transform: scale(1.08);
 }
 
 footer {

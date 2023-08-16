@@ -6,7 +6,6 @@ import { Link, } from 'react-scroll';
 export default function Header(){
 
     const [scrolled, setScrolled] = useState(false);
-    console.log(scrolled)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -29,16 +28,12 @@ export default function Header(){
                 <Link to="products" smooth={true} duration={500}>
                     <button >محصولات</button >
                 </Link>
-                <Link to="services" smooth={true} duration={500}>
-                    <button >خدمـات</button >
-                </Link>
+                <a href="/services">خدمـات</a>
                 <a href="/solutions">راه حل ها</a>
                 <a href="/machinery">ماشین آلات</a>
-                <Link to="contact_us" smooth={true} duration={500}>
-                    <button >تماس با ما</button >
-                </Link>
+                <a href="/contactus">تماس با ما</a>
             </nav>
-            <img src={`${scrolled ? 'fullLogoBlack.svg' : '/fullLogo.svg'}`} alt="راسا پلیمر"></img>
+            <a href='/'><img src={`${scrolled ? 'fullLogoBlack.svg' : '/fullLogo.svg'}`} alt="راسا پلیمر"></img></a>
         </header>
     )
 }
