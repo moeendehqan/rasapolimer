@@ -2,10 +2,11 @@ import Header from "../componets/header"
 
 
 const ProductsPg = () =>{
+
     return(
         <>
             <Header />
-            <main className="ProductsPg">
+            <main  className="ProductsPg">
                 <div className="hd">
                     <img src="image/Rectangle 41.jpg" alt="Quality & Safety right next to you"></img>
                     <div className="conteiner ">

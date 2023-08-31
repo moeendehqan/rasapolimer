@@ -31,7 +31,7 @@ const Contact_us = () =>{
 
                     </form>
                     <div className="imgCntinr">
-                        <img src="image/Rectangle 38.jpg" alt="تسمه بسته بندی"></img>
+                        <img src="image/callcenter.svg" alt="تسمه بسته بندی"></img>
                         <p>درخواست و اطلاعات تماس خود را برای ما ارسال کنید تا کارشناسان فروش راساپلیمر در اولین فرصت با شما تماس گرفته و راهنمایی حرفه‌ای در اختیارتان قرار دهند</p>
                     </div>
                 </div>

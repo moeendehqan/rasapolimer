@@ -3,8 +3,7 @@ import Header from './componets/header'
 import VideoPlayer from './componets/videoPlayer'
 import About_us from './componets/about_us'
 import Products from './componets/Products'
-import Contact_us from './componets/contact us'
-
+import Footer from './componets/footer'
 
 export default function Home() {
   return (
@@ -20,9 +19,8 @@ export default function Home() {
         <VideoPlayer />
         <About_us />
         <Products />
-        <Contact_us />
       </main>
-
+      <Footer />
 
     </>
   )

@@ -1,8 +1,11 @@
+import { useRef } from "react";
 
 
 const Products = () =>{
+    const productsSectionRef = useRef(null);
+
     return(
-        <div className="Product" name="products">
+        <div ref={productsSectionRef} className="Product" name="products" id="products">
             <div className="hd">
                 <img src="image/Product.jpg" alt="محصولات"></img>
                 <div className="conteiner">

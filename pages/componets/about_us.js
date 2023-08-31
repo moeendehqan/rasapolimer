@@ -2,7 +2,7 @@
 export default function About_us(){
     return(
         <>
-            <div className="PgImgGrdnt" name='About_us'>
+            <div className="PgImgGrdnt" name='about_us' id="about_us">
                 <section>
                     <div className="contentTwoCulomn">
                         <div className="contentConteiner">
