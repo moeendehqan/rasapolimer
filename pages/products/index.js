@@ -1,5 +1,5 @@
 import Header from "../componets/header"
-
+import Footer from "../componets/footer"
 
 const ProductsPg = () =>{
 
@@ -320,6 +320,7 @@ const ProductsPg = () =>{
 
                 </section>
             </main>
+            <Footer />
         </>
     )
 }

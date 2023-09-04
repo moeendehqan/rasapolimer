@@ -32,7 +32,7 @@ html, body, #__next {
 header {
   display: flex;
   flex-direction: row;
-  background: rgba(42, 48, 64, 0.4);
+  background: #2A3040;
   justify-content: space-around;
   align-items: center;
   height: 120px;
@@ -105,7 +105,7 @@ main {
 .PgImgGrdnt > section .contentTwoCulomn {
   display: flex;
   flex-direction: row;
-  width: 75%;
+  width: 70%;
   z-index: 3;
   border-radius: 15px;
   overflow: hidden;
@@ -124,6 +124,11 @@ main {
   align-items: flex-start;
   justify-content: center;
 }
+.PgImgGrdnt > section .contentTwoCulomn .contentConteiner > div p {
+  margin-left: 100px;
+  direction: rtl;
+  text-align: justify;
+}
 .PgImgGrdnt > section .contentTwoCulomn .contentConteiner > div img {
   margin: 10px 20px;
 }
@@ -136,6 +141,8 @@ main {
   color: #FEFEFE;
   text-align: center;
   direction: ltr;
+  width: 100%;
+  font-size: 20pt;
 }
 .PgImgGrdnt > section .exportContent img {
   background: rgba(255, 255, 255, 0.5019607843);
@@ -417,8 +424,18 @@ main {
 .contact_us footer .infCrd .imgCnt img {
   width: 45%;
 }
-.contact_us footer .infCrd .txtcnt p {
+.phoneConteiner {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.phoneConteiner :nth-child(1)::before {
+  content: "-";
+  margin: 0px 5px;
+}
+.phoneConteiner p {
   color: #FFFFFF;
+  direction: rtl;
+  margin: 0px 5px;
 }
 
 .services {
@@ -438,7 +455,7 @@ main {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: space-around;
   z-index: 2;
   margin-bottom: 100px;
 }
@@ -448,7 +465,7 @@ main {
   border-top-right-radius: 25px;
 }
 .services section .cntxt {
-  width: 60%;
+  width: 65%;
 }
 .services section .cntxt h6 {
   color: #F4C22E;
@@ -465,6 +482,7 @@ main {
 }
 .services section .cntxt .prg img {
   width: 35%;
+  margin-right: 60px;
 }
 
 .video {
@@ -576,6 +594,7 @@ main {
 .ProductsPg section .Cd-prd .dscrptn p {
   font-size: 11pt;
   text-align: justify;
+  margin-top: 30px;
 }
 
 .SolutionsPg {
@@ -684,7 +703,8 @@ main {
   text-align: justify;
 }
 .SolutionsPg section {
-  width: 1000px;
+  width: auto;
+  margin: 0px 200px;
 }
 .SolutionsPg section .title {
   width: 100%;
@@ -1034,6 +1054,9 @@ footer .infCrd .txtcnt p {
     width: 95%;
     justify-content: space-around;
   }
+  .SolutionsPg {
+    margin: 0px 100px;
+  }
   .SolutionsPg section {
     width: 95%;
     justify-content: space-around;
@@ -1112,6 +1135,9 @@ footer .infCrd .txtcnt p {
   }
   .video {
     position: relative;
+  }
+  .SolutionsPg {
+    margin: 0px 20px;
   }
   .PgImgGrdnt section .contentTwoCulomn {
     flex-direction: column-reverse;

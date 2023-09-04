@@ -19,6 +19,7 @@
     src: url('../public/static/IBMPlexArabic-Thin.ttf');
 }
 
+$colorBlack0: #2A3040;
 $colorBlack1: #2A304066;
 $colorLight1: #D9D9D980;
 $colorWithe1: #FEFEFE;
@@ -46,7 +47,7 @@ html,body,#__next{
 header{
     display: flex;
     flex-direction: row;
-    background: $colorBlack1;
+    background: $colorBlack0;
     justify-content: space-around;
     align-items: center;
     height: $sizeHeightHeader;
@@ -127,7 +128,7 @@ main{
         .contentTwoCulomn{
             display: flex;
             flex-direction: row;
-            width: 75%;
+            width: 70%;
             z-index: 3;
             border-radius: 15px;
             overflow: hidden;
@@ -143,6 +144,11 @@ main{
                     flex-direction: row;
                     align-items: flex-start;
                     justify-content: center;
+                    p{
+                        margin-left: 100px;
+                        direction: rtl;
+                        text-align: justify;
+                    }
                     img{
                         margin: 10px 20px;
                     }
@@ -158,6 +164,8 @@ main{
                 color: $colorWithe1;
                 text-align: center;
                 direction: ltr;
+                width: 100%;
+                font-size: 20pt;
             }
             img{
                 background: $colorWithe2;
@@ -457,16 +465,28 @@ main{
             }
     
             .txtcnt{
-                p{
-                    color: #FFFFFF;
-                }
+
             }
     
         }
     }    
 }
 
-
+.phoneConteiner{
+    display: flex;
+    flex-direction: row-reverse;
+    :nth-child(1){
+        &::before{
+            content: '-';
+            margin: 0px 5px;
+        }
+    }
+    p{
+        color: #FFFFFF;
+        direction: rtl;
+        margin: 0px 5px;
+    }
+}
 
 .services{
     display: flex;
@@ -489,7 +509,7 @@ main{
         display: flex;
         flex-direction: row;
         align-items: flex-end;
-        justify-content: space-between;
+        justify-content: space-around;
         z-index: 2;
         margin-bottom: 100px;
         >img{
@@ -498,7 +518,7 @@ main{
             border-top-right-radius: 25px;
         }
         .cntxt{
-            width: 60%;
+            width: 65%;
             h6{
                 color: #F4C22E;
                 font-size: 15pt;
@@ -513,6 +533,7 @@ main{
                 }
                 img{
                     width: 35%;
+                    margin-right: 60px;
                 }
             }
         }
@@ -620,6 +641,7 @@ main{
                 p{
                     font-size: 11pt;
                     text-align: justify;
+                    margin-top: 30px;
                 }
             }
         }
@@ -735,7 +757,8 @@ main{
         }
     }
     section{
-        width: 1000px;
+        width: auto;
+        margin: 0px 200px;
         .title{
             width: 100%;
             background: #EFF0F5F7;
@@ -1150,6 +1173,7 @@ footer{
         }
     }
     .SolutionsPg{
+        margin: 0px 100px;
         section{
             width: 95%;
             justify-content: space-around;
@@ -1244,6 +1268,10 @@ footer{
     }
     .video{
         position: relative;
+    }
+    .SolutionsPg{
+        margin: 0px 20px;
+
     }
     .PgImgGrdnt{
         section{

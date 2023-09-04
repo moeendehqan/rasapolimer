@@ -47,7 +47,7 @@ const MachineryPg = () =>{
                     <div className={boxStatus.HighSpeed?"dropbox dropboxOpen":"dropbox dropboxClose"}>
                         <div className="btn" onClick={()=>changeStatus('HighSpeed')}>
                             <img src="image/arrow.svg" />
-                            <p>High Speed ماشین‌آلات تسمه‌کش</p>
+                            <p>ماشین‌آلات تسمه‌کش High Speed</p>
                         </div>
                         <div className={boxStatus.HighSpeed?"cards":"cards close"}>
                             <div className="card">
@@ -59,7 +59,7 @@ const MachineryPg = () =>{
                                     <span>TP-702C</span>
                                 </div>
                                 <div className="parg">
-                                    <h3>High Speed ماشین‌آلات تسمه‌کش</h3>
+                                    <h3>ماشین‌آلات تسمه‌کش High Speed</h3>
                                     <h3>High Speed Strapping Machines</h3>
                                     <ul>
                                         <li>Robust & compact mechanical strapping head</li>
@@ -112,7 +112,7 @@ const MachineryPg = () =>{
                     <div className={boxStatus.SideSeal?"dropbox dropboxOpen":"dropbox dropboxClose"}>
                         <div className="btn" onClick={()=>changeStatus('SideSeal')}>
                             <img src="image/arrow.svg" />
-                            <p>Side-Seal ماشین‌آلات تسمه‌کش </p>
+                            <p>ماشین‌آلات تسمه‌کش Side-Seal</p>
                         </div>
                         <div className={boxStatus.SideSeal?"cards":"cards close"}>
                             <div className="card">

@@ -18,9 +18,21 @@ const Footer = () =>{
                     <img src='image/phone.svg' alt='تلفن'></img>
                 </div>
                 <div className='txtcnt'>
-                    <p>۰۴۱ - ۳۶۳۰   ۹۶۹۹</p>
-                    <p>۰۴۱ - ۳۶۳۰   ۹۵۸۹</p>
-                    <p>۰۴۱ - ۳۶۳۰   ۹۵۵۱</p>
+                    <div className="phoneConteiner">
+                        <p>۰۴۱</p>
+                        <p>۳۶۳۰</p>
+                        <p>۹۶۹۹</p>
+                    </div>
+                    <div className="phoneConteiner">
+                        <p>۰۴۱</p>
+                        <p>۳۶۳۰</p>
+                        <p>۹۵۸۹</p>
+                    </div>
+                    <div className="phoneConteiner">
+                        <p>۰۴۱</p>
+                        <p>۳۶۳۰</p>
+                        <p>۹۵۵۱</p>
+                    </div>
                 </div>
             </div>
             <div className='infCrd'>
