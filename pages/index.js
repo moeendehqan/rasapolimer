@@ -4,7 +4,7 @@ import VideoPlayer from './componets/videoPlayer'
 import About_us from './componets/about_us'
 import Products from './componets/Products'
 import Footer from './componets/footer'
-
+import MiniCms from './componets/miniCms'
 export default function Home() {
   return (
     <>
@@ -19,6 +19,7 @@ export default function Home() {
         <VideoPlayer />
         <About_us />
         <Products />
+        <MiniCms />
       </main>
       <Footer />
 

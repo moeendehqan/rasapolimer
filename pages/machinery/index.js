@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Header from "../componets/header"
 import Footer from "../componets/footer"
+import { BsDownload , BsPlayCircleFill} from "react-icons/bs";
 
 const MachineryPg = () =>{
     const [boxStatus, setBoxStatus] = useState({
@@ -12,7 +13,23 @@ const MachineryPg = () =>{
         'Pneumatic':false
     })
 
-    console.log(boxStatus)
+    const [Player, setPlayer] = useState({src:'',title:'',play:false})
+
+    const [videosState, setVideoState] = useState([
+        {src:'IMG_7450.MP4',title:'دستگاه فول اتومات high speed  صنعت کارتن‌سازی'},
+        {src:'IMG_7458.MP4',title:'دستگاه اتوماتیک - صنعت لوازم خانگی'},
+        {src:'IMG_7451.MP4',title:'دستگاه اتوماتیک - صنعت کارتن‌سازی'},
+        {src:'IMG_7452.MP4',title:'دستگاه تسمه‌کش اتوماتیک - صنعت کاشی و سرامیک'},
+        {src:'IMG_7453.MP4',title:'دستگاه تسمه‌کش اتوماتیک - صنعت لوازم خانگی'},
+        {src:'IMG_7455.MP4',title:'دستگاه فول اتوماتیک - صنعت کارتن‌سازی'},
+        {src:'IMG_7456.MP4',title:'دستگاه فول اتوماتیک - صنعت کارتن‌سازی'},
+        {src:'IMG_7457.MP4',title:'دستگاه پنوماتیک دستی - صنعت مصالح ساختمانی'},
+        {src:'IMG_7459.MP4',title:'دستگاه فول اتوماتیک - صنعت لوازم خانگی'},
+        {src:'IMG_7460.MP4',title:'دستگاه فول اتوماتیک - صنعت لوازم خانگی'},
+        {src:'IMG_7461.MOV',title:'دستگاه فول اتوماتیک - صنعت لوازم خانگی'},
+        {src:'IMG_7462.MP4',title:'دستگاه فول اتوماتیک - صنعت کارتن‌سازی'},
+        {src:'IMG_7463.MOV',title:'دستگاه بغل‌زن فول اتوماتیک - صنعت مواد غذایی'},
+    ])
 
     const changeStatus = (boxName) => {
         setBoxStatus(prevStatus => ({
@@ -20,6 +37,8 @@ const MachineryPg = () =>{
           [boxName]: !prevStatus[boxName]
         }));
       }
+
+    
 
     return(
         <>
@@ -106,6 +125,9 @@ const MachineryPg = () =>{
                                     </ul>
                                 </div>
                             </div>
+                            <div className="download">
+                                <a target="_blank" href='pdf/01 High Speed (09_2021).pdf'>دانلود کاتالوگ ماشین‌آلات high-speed <span><BsDownload/></span></a>
+                            </div>
                         </div>
                     </div>
 
@@ -173,6 +195,9 @@ const MachineryPg = () =>{
                                     </ul>
                                 </div>
                             </div>
+                            <div className="download">
+                                <a target="_blank" href='02 Side-Seal (11_2021).pdf'>دانلود کاتالوگ ماشین‌آلات side-seal <span><BsDownload/></span></a>
+                            </div>
                         </div>
                     </div>
 
@@ -227,6 +252,9 @@ const MachineryPg = () =>{
                                     </ul>
                                 </div>
                             </div>
+                            <div className="download">
+                                <a target="_blank" href='03 Fully Automatic (01_2021).pdf'>دانلود کاتالوگ ماشین‌آلات فول اتوماتیک <span><BsDownload/></span></a>
+                            </div>
                         </div>
                     </div>
 
@@ -278,6 +306,9 @@ const MachineryPg = () =>{
                                         <li>Adjustable table height between 780 mm and 950 mm</li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div className="download">
+                                <a target="_blank" href='04 Semi Automatic.pdf'>دانلود کاتالوگ ماشین‌آلات نیمه اتوماتیک <span><BsDownload/></span></a>
                             </div>
                         </div>
                     </div>
@@ -354,14 +385,43 @@ const MachineryPg = () =>{
                                 <div className="dtil">
                                 </div>
                                 <div className="parg2">
-                                    <h3>Pneumatic Strapping Devices</h3>
-                                    <p>H-46 is a world-class battery powered strapping tool. H-46 delivers the highest productivity and performance to meet the customers' packaging needs. With flexible settings, wide tension range, and the ability to accommodate both PP and PET strapping is ideal for a wide range applications in all industries and sectors.</p>
+                                    <h3>BATTERY POWERED TOOL FOR PLASTIC STRAPPING</h3>
+                                    <p>Kronos H-46 is a world-class battery powered strapping tool with superior features and performance. It can meet most of the strapping requirements for every application. Kronos H-46 is equipped with German-made brushless DC motor to provide the highest level of accuracy and reliability. </p>
                                 </div>
                             </div>
                             <img className="att-card2" src="image/0028 1.png" alt="Pneumatic Strapping Devices"/>
                         </div>
                     </div>
+
                 </section>
+                <div className="videoContnr">
+                    <h2>راه‌اندازی دستگاه‌های تسمه‌کش در صنعت‌های مختلف توسط راسا پلیمر</h2>
+                    <div className="videos">
+                        {
+                            videosState.map(i=>{
+                                return(
+                                    <div className="video" onClick={()=>setPlayer({src:i.src,title:i.title,play:true})}>
+                                        <h6>{i.title}</h6>
+                                        <span><BsPlayCircleFill/></span>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    {
+                        Player.play?
+                        <div className="PopPlay">
+                            <div className="closer" onClick={()=>setPlayer({...Player,play:false})}>
+                            </div>
+                            <div className="videoPlayer">
+                                <video autoPlay src={"video/"+Player.src}></video>
+
+                            </div>
+
+                        </div>
+                        :null
+                    }
+                </div>
                 <Footer/>
             </main>
         </>

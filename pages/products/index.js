@@ -19,10 +19,9 @@ const ProductsPg = () =>{
                     <div className="Cd-prd">
                         <div className="img-cntinr">
                             <img src="image/pg-prd1.png"></img>
-                            <p>High Speed</p>
-                            <p>Straps</p>
                         </div>
                         <div className="tb-cntinr">
+                            <h5>High Speed Straps</h5>
                             <h6>جدول اطلاعات محصول</h6>
                             <table>
                                 <thead>
@@ -34,44 +33,44 @@ const ProductsPg = () =>{
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>5.0x0.6mm</td>
+                                        <td>0.5x0.4mm</td>
                                         <td>200,280mm</td>
-                                        <td>400kg</td>
+                                        <td>70kg</td>
                                     </tr>
                                     <tr>
-                                        <td>8.0x0.8mm</td>
+                                        <td>0.5x0.5mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>400kg</td>
+                                        <td>80kg</td>
                                     </tr>
                                     <tr>
-                                        <td>8.0x1.0mm</td>
+                                        <td>0.8x0.6mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>600kg</td>
+                                        <td>100kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0.8x0.7mm</td>
+                                        <td>200,280,405mm</td>
+                                        <td>120kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10.0x0.7mm</td>
+                                        <td>200,280,405mm</td>
+                                        <td>140kg</td>
                                     </tr>
                                     <tr>
                                         <td>10.0x0.8mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>800kg</td>
+                                        <td>160kg</td>
                                     </tr>
                                     <tr>
-                                        <td>10.0x1.0mm</td>
+                                        <td>12.0x0.7mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>900kg</td>
+                                        <td>180kg</td>
                                     </tr>
                                     <tr>
                                         <td>12.0x0.8mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>1000kg</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12.0x1.0mm</td>
-                                        <td>200,280,405mm</td>
-                                        <td>1000kg</td>
-                                    </tr>
-                                    <tr>
-                                        <td>14.0x1.0mm</td>
-                                        <td>200,280,405mm</td>
-                                        <td>1000kg</td>
+                                        <td>200kg</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -85,10 +84,9 @@ const ProductsPg = () =>{
                     <div className="Cd-prd">
                         <div className="img-cntinr">
                             <img src="image/pg-prd2.png"></img>
-                            <p>Fully Automatic</p>
-                            <p>Straps</p>
                         </div>
                         <div className="tb-cntinr">
+                            <h5>Fully Automatic Straps</h5>
                             <h6>جدول اطلاعات محصول</h6>
                             <table>
                                 <thead>
@@ -102,42 +100,42 @@ const ProductsPg = () =>{
                                     <tr>
                                         <td>8.0x0.8mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>400kg</td>
+                                        <td>120kg</td>
                                     </tr>
                                     <tr>
-                                        <td>8.0x1.0mm</td>
+                                        <td>8.0x0.9mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>600kg</td>
+                                        <td>140kg</td>
                                     </tr>
                                     <tr>
                                         <td>10.0x0.8mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>800kg</td>
+                                        <td>160kg</td>
                                     </tr>
                                     <tr>
-                                        <td>10.0x1.0mm</td>
+                                        <td>10.0x0.9mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>900kg</td>
+                                        <td>180kg</td>
                                     </tr>
                                     <tr>
                                         <td>12.0x0.8mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>1000kg</td>
+                                        <td>200kg</td>
                                     </tr>
                                     <tr>
-                                        <td>12.0x1.0mm</td>
+                                        <td>12.0x0.9mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>1000kg</td>
+                                        <td>220kg</td>
                                     </tr>
                                     <tr>
-                                        <td>16.0x1.0mm</td>
+                                        <td>14.0x0.8mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>1000kg</td>
+                                        <td>240kg</td>
                                     </tr>
                                     <tr>
-                                        <td>16.0x1.0mm</td>
+                                        <td>14.0x0.9mm</td>
                                         <td>200,280,405mm</td>
-                                        <td>1000kg</td>
+                                        <td>250kg</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -151,10 +149,9 @@ const ProductsPg = () =>{
                     <div className="Cd-prd">
                         <div className="img-cntinr">
                             <img src="image/pg-prd3.png"></img>
-                            <p>Semi-Automatic</p>
-                            <p>Straps</p>
                         </div>
                         <div className="tb-cntinr">
+                            <h5>Semi-Automatic Straps</h5>
                             <h6>جدول اطلاعات محصول</h6>
                             <table>
                                 <thead>
@@ -168,42 +165,47 @@ const ProductsPg = () =>{
                                     <tr>
                                         <td>8.0x0.8mm</td>
                                         <td>200,280mm</td>
-                                        <td>400kg</td>
+                                        <td>120kg</td>
                                     </tr>
                                     <tr>
-                                        <td>8.0x1.0mm</td>
+                                        <td>8.0x0.9mm</td>
                                         <td>200,280mm</td>
-                                        <td>600kg</td>
+                                        <td>140kg</td>
                                     </tr>
                                     <tr>
                                         <td>10.0x0.8mm</td>
                                         <td>200,280mm</td>
-                                        <td>800kg</td>
+                                        <td>160kg</td>
                                     </tr>
                                     <tr>
-                                        <td>10.0x1.0mm</td>
+                                        <td>10.0x0.9mm</td>
                                         <td>200,280mm</td>
-                                        <td>900kg</td>
+                                        <td>180kg</td>
                                     </tr>
                                     <tr>
                                         <td>12.0x0.8mm</td>
                                         <td>200,280mm</td>
-                                        <td>1000kg</td>
+                                        <td>200kg</td>
                                     </tr>
                                     <tr>
-                                        <td>12.0x1.0mm</td>
+                                        <td>12.0x0.9mm</td>
                                         <td>200,280mm</td>
-                                        <td>1000kg</td>
+                                        <td>220kg</td>
                                     </tr>
                                     <tr>
-                                        <td>14.0x1.0mm</td>
+                                        <td>14.0x0.8mm</td>
                                         <td>200,280mm</td>
-                                        <td>1000kg</td>
+                                        <td>240kg</td>
                                     </tr>
                                     <tr>
-                                        <td>16.0x1.0mm</td>
+                                        <td>14.0x0.9mm</td>
                                         <td>200,280mm</td>
-                                        <td>1000kg</td>
+                                        <td>260kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15.0x0.9mm</td>
+                                        <td>200,280mm</td>
+                                        <td>300kg</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -217,10 +219,9 @@ const ProductsPg = () =>{
                     <div className="Cd-prd">
                         <div className="img-cntinr">
                             <img src="image/pg-prd4.png"></img>
-                            <p>PET Polyester</p>
-                            <p>Straps</p>
                         </div>
                         <div className="tb-cntinr">
+                            <h5>PET Polyester Straps</h5>
                             <h6>جدول اطلاعات محصول</h6>
                             <table>
                                 <thead>
@@ -234,25 +235,35 @@ const ProductsPg = () =>{
                                     <tr>
                                         <td>12.0x0.9mm</td>
                                         <td>405,200mm</td>
+                                        <td>300kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14.0x1.1mm</td>
+                                        <td>405,200mm</td>
                                         <td>400kg</td>
                                     </tr>
                                     <tr>
-                                        <td>14.0x1.2mm</td>
+                                        <td>16.0x1.1mm</td>
                                         <td>405,200mm</td>
+                                        <td>500kg</td>
+                                    </tr>
+                                    <tr>
+                                        <td>19.0x1.1mm</td>
+                                        <td>405mm</td>
                                         <td>600kg</td>
                                     </tr>
                                     <tr>
-                                        <td>16.0x1.3mm</td>
-                                        <td>405,200mm</td>
+                                        <td>22.0x1.1mm</td>
+                                        <td>405mm</td>
                                         <td>800kg</td>
                                     </tr>
                                     <tr>
-                                        <td>19.0x1.3mm</td>
+                                        <td>25.0x1.1mm</td>
                                         <td>405mm</td>
                                         <td>900kg</td>
                                     </tr>
                                     <tr>
-                                        <td>22.0x1.5mm</td>
+                                        <td>32.0x1.1mm</td>
                                         <td>405mm</td>
                                         <td>1000kg</td>
                                     </tr>
@@ -270,10 +281,9 @@ const ProductsPg = () =>{
                     <div className="Cd-prd">
                         <div className="img-cntinr">
                             <img src="image/pg-prd5.png"></img>
-                            <p>PP Vibratory</p>
-                            <p>Straps</p>
                         </div>
                         <div className="tb-cntinr">
+                            <h5>PP Vibratory Straps</h5>
                             <h6>جدول اطلاعات محصول</h6>
                             <table>
                                 <thead>
@@ -285,29 +295,29 @@ const ProductsPg = () =>{
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>14.0x1.3mm</td>
+                                        <td>14.0x1.0mm</td>
                                         <td>200mm</td>
-                                        <td>400kg</td>
+                                        <td>200kg</td>
                                     </tr>
                                     <tr>
-                                        <td>16.0x1.3mm</td>
+                                        <td>16.0x1.0mm</td>
                                         <td>200mm</td>
-                                        <td>600kg</td>
+                                        <td>250kg</td>
                                     </tr>
                                     <tr>
-                                        <td>18.0x1.3mm</td>
+                                        <td>19.0x1.0mm</td>
                                         <td>200mm</td>
-                                        <td>800kg</td>
+                                        <td>300kg</td>
                                     </tr>
                                     <tr>
-                                        <td>20.0x1.5mm</td>
+                                        <td>22.0x1.1mm</td>
                                         <td>200mm</td>
-                                        <td>900kg</td>
+                                        <td>330kg</td>
                                     </tr>
                                     <tr>
-                                        <td>22.0x1.5mm</td>
+                                        <td>25.0x1.1mm</td>
                                         <td>200mm</td>
-                                        <td>1000kg</td>
+                                        <td>350kg</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -9,7 +9,7 @@ const Products = () =>{
             <div className="hd">
                 <img src="image/Product.jpg" alt="محصولات"></img>
                 <div className="conteiner">
-                    <img src="image/iconP.svg" alt="PET"></img>
+                    <img src="image/icn1.jpg" alt="PET"></img>
                     <p>PP  / PET  Environmentally Friendly Straps</p>
                 </div>
             </div>
