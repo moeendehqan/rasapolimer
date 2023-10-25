@@ -1,15 +1,26 @@
 import React, { useEffect } from 'react';
-import Footer from './footer';
-
+import Header from '../componets/header';
+import SimpleMap from '../componets/map';
 const Contact_us = () =>{
 
-    const toMap=()=>{
-        window.open('https://goo.gl/maps/TrjVMqEXeMxzoMX67')
-    }
 
+    const redirectToEmailClient = () => {
+        const mailtoLink = 'mailto:info@rasapolymer';
+        window.location.href = mailtoLink;
+      };
+      const redirectToTellClient = () => {
+        const tell = 'tel:04136309699'
+        window.location.href = tell;
+      };
 
+      const redirectToLocationClient = () => {
+        const location = 'https://goo.gl/maps/YQM7fCHuiRdSMa9Y7'
+        window.location.href = location;
+      };
     return(
-        <div className="contact_us" name='contact_us'>
+        <>
+        <Header />
+        <div className="contact_us" name='contact_us' id='contact_us'>
             <div className="hd">
                 <img src="image/contactus.jpg" alt="محصولات"></img>
                 <div className="conteiner">
@@ -29,14 +40,15 @@ const Contact_us = () =>{
 
                     </form>
                     <div className="imgCntinr">
-                        <img src="image/Rectangle 38.jpg" alt="تسمه بسته بندی"></img>
+                        <img src="image/callcenter.svg" alt="تسمه بسته بندی"></img>
                         <p>درخواست و اطلاعات تماس خود را برای ما ارسال کنید تا کارشناسان فروش راساپلیمر در اولین فرصت با شما تماس گرفته و راهنمایی حرفه‌ای در اختیارتان قرار دهند</p>
                     </div>
                 </div>
-                <img src='image/map.jpg' alt='نقشه' onClick={toMap}></img>
+                <img src='image/map.jpg' alt='نقشه' onClick={redirectToLocationClient}></img>
+
             </section>
             <footer>
-            <div className='infCrd'>
+            <div className='infCrd' onClick={redirectToEmailClient}>
                 <div className='imgCnt'>
                     <img src='image/email.svg' alt='ایمیل'></img>
                 </div>
@@ -44,17 +56,29 @@ const Contact_us = () =>{
                     <p>info@rasapolymer.com</p>
                 </div>
             </div>
-            <div className='infCrd'>
+            <div className='infCrd' onClick={redirectToTellClient}>
                 <div className='imgCnt'>
                     <img src='image/phone.svg' alt='تلفن'></img>
                 </div>
                 <div className='txtcnt'>
-                    <p>۰۴۱ - ۳۶۳۰   ۹۶۹۹</p>
-                    <p>۰۴۱ - ۳۶۳۰   ۹۵۸۹</p>
-                    <p>۰۴۱ - ۳۶۳۰   ۹۵۵۱</p>
+                    <div className="phoneConteiner">
+                        <p>041</p>
+                        <p>3630</p>
+                        <p>9699</p>
+                    </div>
+                    <div className="phoneConteiner">
+                        <p>041</p>
+                        <p>3630</p>
+                        <p>9589</p>
+                    </div>
+                    <div className="phoneConteiner">
+                        <p>041</p>
+                        <p>3630</p>
+                        <p>9551</p>
+                    </div>
                 </div>
             </div>
-            <div className='infCrd'>
+            <div className='infCrd' onClick={redirectToLocationClient}>
                 <div className='imgCnt'>
                     <img src='image/loction.svg' alt='موقعیت'></img>
                 </div>
@@ -67,6 +91,7 @@ const Contact_us = () =>{
         </footer>
 
         </div>
+        </>
     )
 }
 

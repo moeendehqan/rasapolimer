@@ -28,6 +28,22 @@ export default function Header(){
         }, 800);
       };
 
+      const handleContact_us = () => {
+        // تغییر روت به صفحه‌ی اصلی
+        router.push('/')
+        
+        // اسکرول به بخش محصولات
+        window.location.hash = 'contact_us';
+  
+        // انجام اسکرول با تابع scrollTo
+        setTimeout(() => {
+          window.scrollTo({
+            top: document.getElementById('contact_us').offsetTop,
+            behavior: 'smooth'
+          });
+        }, 800);
+      };
+
       const handleAbout_usClick = () => {
         // تغییر روت به صفحه‌ی اصلی
         router.push('/')
@@ -65,7 +81,7 @@ export default function Header(){
                     <a href="/services">خدمـات</a>
                     <a href="/solutions">راه حل ها</a>
                     <a href="/machinery">ماشین آلات</a>
-                    <a href="/contactus">تماس با ما</a>
+                    <button onClick={handleContact_us}>تماس با ما</button >
                   </div>
                 </div>
             </nav>

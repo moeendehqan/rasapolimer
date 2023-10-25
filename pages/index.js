@@ -5,6 +5,7 @@ import About_us from './componets/about_us'
 import Products from './componets/Products'
 import Footer from './componets/footer'
 import MiniCms from './componets/miniCms'
+import Contact_us from './componets/contact us'
 export default function Home() {
   return (
     <>
@@ -21,7 +22,7 @@ export default function Home() {
         <Products />
         <MiniCms />
       </main>
-      <Footer />
+      <Contact_us />
 
     </>
   )

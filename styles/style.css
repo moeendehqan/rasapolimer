@@ -402,7 +402,7 @@ main {
 .contact_us footer {
   height: 300px;
   width: 100%;
-  background: #48546C;
+  background: #222220;
   margin-top: -130px;
   display: flex;
   flex-direction: row-reverse;
@@ -515,7 +515,7 @@ main {
 }
 .services section .panevisa {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   align-content: flex-start;
 }
@@ -736,14 +736,14 @@ main {
 }
 .SolutionsPg .popup {
   position: fixed;
-  width: 900px;
-  z-index: 6;
+  width: 1100px;
+  z-index: 10;
   height: 650px;
   padding: 0px;
   background: #eff0f5;
   border-radius: 10px;
   top: calc((100vh - 650px) / 2);
-  left: calc((100vw - 1000px) / 2);
+  left: calc((100vw - 1100px) / 2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -829,17 +829,18 @@ main {
 .SolutionsPg .popup .parg {
   display: flex;
   flex-direction: row-reverse;
-  width: 95%;
+  width: 90%;
   align-items: center;
   justify-content: space-around;
 }
 .SolutionsPg .popup .parg img {
-  width: 30%;
+  width: 25%;
 }
 .SolutionsPg .popup .parg > div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 55%;
 }
 .SolutionsPg .popup .parg > div h5 {
   background: #FFC132;
@@ -851,11 +852,12 @@ main {
   margin: 10px 0px;
 }
 .SolutionsPg .popup .parg p {
-  width: 60%;
+  width: 100%;
   text-align: justify;
 }
 .SolutionsPg .popup .pavaragh {
-  height: 80px;
+  margin-top: 10px;
+  height: 100px;
   background: #D9DCE3;
   display: flex;
   flex-direction: row;
@@ -938,7 +940,7 @@ main {
 footer {
   height: 120px;
   width: 100%;
-  background: #48546C;
+  background: #222220;
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
@@ -1075,6 +1077,9 @@ footer .infCrd .txtcnt p {
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+.MachineryPg .cards > :nth-last-child(2) {
+  border-bottom: 0px !important;
 }
 .MachineryPg .cards > :last-child {
   border-bottom: 0px !important;
