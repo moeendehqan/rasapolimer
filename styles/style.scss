@@ -82,9 +82,8 @@ header{
     img{
         width: 250px;
     }
-    .opn-mn{
-        display: none;
-    }
+    .higmenu{display: none;}
+
     nav{
         display: flex;
         flex-direction: row;
@@ -1416,6 +1415,16 @@ footer{
             }
         }
     }
+    .PgImgGrdnt{
+        section{
+            .contentTwoCulomn{
+                img{
+                    width: 25%;
+                }
+                
+            }
+        }
+    }
     .Product{
         section{
             justify-content: space-around;
@@ -1489,62 +1498,59 @@ footer{
 
 
 @media screen and (max-width: 850px) {
-    .headerScrolled{
-        .opn-mn{
-            p{
-                color: $colorBlack1 !important;
-            }
-        }
-    }
+
     header{
-        .opn-mn{
+        .higmenu{
+            height: 100;
             display: flex;
-            flex-direction: row;
-            width: 50px;
-            p{
-                font-size: 22pt;
-                color: $colorWithe1;
-                cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            .opn-mn{
+                display: flex;
+                flex-direction: row;
+                padding: 0px 10px;
+                background: $colorYellow;
+                align-items: center;
+                justify-content: center;
+                p{
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 22pt;
+                    color: $colorBlackDeep;
+                    cursor: pointer;
+                }
+            }
+            .btns-col{
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 85px;
+                right: 10px;
+                background: $colorYellow;
+                width: 150px;
+                button, a{
+                    height: 35px;
+                    border-bottom: 1px $colorBlackDeep solid;
+                    width: 100%;
+                    color: $colorBlackDeep;
+                    font-size: 12pt;
+                    cursor: pointer;
+                }
+                >:last-child{
+                    border: 0px;
+                }
+
+
             }
         }
 
         .widemenu{
-            transition: 1s;
-            .cls-mn{
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: flex-end;
-                width: 100%;
-                p{
-                    text-align: left;
-                    margin: 20px;
-                    cursor: pointer;
-                    color: $colorWithe1;
-                    font-size: 22pt;
-                }
-            }
-            flex-direction: column;
-            position: fixed;
-            top: 0px;
-            bottom: 0px;
-            right: 0px;
-            background: $colorTosi2;
-            width: 220px;
-            a, button{
-                z-index: 25;
-                height: 50px;
-                color: $colorWithe1  !important;
-                width:100% ;
-            }
+            display: none;
+        }
 
-        }
-        .show{
-            width: 0px;
-            div,a,button{
-                opacity: 0;
-            }
-        }
     }
     .video{
         position: relative;
@@ -1554,23 +1560,27 @@ footer{
 
     }
     .PgImgGrdnt{
+        >img{
+            display: none;
+        }
         section{
             .contentTwoCulomn{
                 flex-direction: column-reverse;
+                >img{
+                    width: 100%;
+                    border-radius: 15px;
+                }
                 .contentConteiner{
                     margin: 0px;
+                    border-radius: 15px;
+                    background: transparent;
                     >div{
-                        align-items: center;
-                        margin: 20px;
-                        p{text-align: justify;}
+                        flex-direction: column;
                     }
                 }
             }
-            .exportContent{
-                margin-top: 10px;
-
-            }
         }
+
     }
     .hd{
         height: 100px !important;

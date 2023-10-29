@@ -66,7 +66,7 @@ header .conteinerNav .btns {
 header img {
   width: 250px;
 }
-header .opn-mn {
+header .higmenu {
   display: none;
 }
 header nav {
@@ -1298,6 +1298,9 @@ footer .infCrd .txtcnt p {
   header > a img {
     width: 180px;
   }
+  .PgImgGrdnt section .contentTwoCulomn img {
+    width: 25%;
+  }
   .Product section {
     justify-content: space-around;
     width: auto;
@@ -1352,54 +1355,52 @@ footer .infCrd .txtcnt p {
   }
 }
 @media screen and (max-width: 850px) {
-  .headerScrolled .opn-mn p {
-    color: rgba(42, 48, 64, 0.4) !important;
+  header .higmenu {
+    height: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
-  header .opn-mn {
+  header .higmenu .opn-mn {
     display: flex;
     flex-direction: row;
-    width: 50px;
+    padding: 0px 10px;
+    background: #FFC132;
+    align-items: center;
+    justify-content: center;
   }
-  header .opn-mn p {
-    font-size: 22pt;
-    color: #FEFEFE;
-    cursor: pointer;
-  }
-  header .widemenu {
-    transition: 1s;
-    flex-direction: column;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    right: 0px;
-    background: #48546C;
-    width: 220px;
-  }
-  header .widemenu .cls-mn {
-    display: flex;
+  header .higmenu .opn-mn p {
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-  }
-  header .widemenu .cls-mn p {
-    text-align: left;
-    margin: 20px;
-    cursor: pointer;
-    color: #FEFEFE;
+    justify-content: center;
     font-size: 22pt;
+    color: #222220;
+    cursor: pointer;
   }
-  header .widemenu a, header .widemenu button {
-    z-index: 25;
-    height: 50px;
-    color: #FEFEFE !important;
+  header .higmenu .btns-col {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 85px;
+    right: 10px;
+    background: #FFC132;
+    width: 150px;
+  }
+  header .higmenu .btns-col button, header .higmenu .btns-col a {
+    height: 35px;
+    border-bottom: 1px #222220 solid;
     width: 100%;
+    color: #222220;
+    font-size: 12pt;
+    cursor: pointer;
   }
-  header .show {
-    width: 0px;
+  header .higmenu .btns-col > :last-child {
+    border: 0px;
   }
-  header .show div, header .show a, header .show button {
-    opacity: 0;
+  header .widemenu {
+    display: none;
   }
   .video {
     position: relative;
@@ -1407,21 +1408,23 @@ footer .infCrd .txtcnt p {
   .SolutionsPg {
     margin: 0px 20px;
   }
+  .PgImgGrdnt > img {
+    display: none;
+  }
   .PgImgGrdnt section .contentTwoCulomn {
     flex-direction: column-reverse;
   }
+  .PgImgGrdnt section .contentTwoCulomn > img {
+    width: 100%;
+    border-radius: 15px;
+  }
   .PgImgGrdnt section .contentTwoCulomn .contentConteiner {
     margin: 0px;
+    border-radius: 15px;
+    background: transparent;
   }
   .PgImgGrdnt section .contentTwoCulomn .contentConteiner > div {
-    align-items: center;
-    margin: 20px;
-  }
-  .PgImgGrdnt section .contentTwoCulomn .contentConteiner > div p {
-    text-align: justify;
-  }
-  .PgImgGrdnt section .exportContent {
-    margin-top: 10px;
+    flex-direction: column;
   }
   .hd {
     height: 100px !important;

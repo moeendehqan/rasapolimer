@@ -63,10 +63,8 @@ export default function Header(){
 
       return(
         <header>
-            <div className='opn-mn'>
-              <p onClick={()=>setMenuHide(!menuHide)}><HiOutlineMenu/></p>
-            </div>
-            <nav className={menuHide?'widemenu show':'widemenu hide'}>
+
+            <nav className={menuHide?'widemenu':'widemenu'}>
                 <div className='cls-mn'>
                   <p onClick={()=>setMenuHide(!menuHide)}><RiCloseFill /></p>
                 </div>
@@ -85,6 +83,25 @@ export default function Header(){
                   </div>
                 </div>
             </nav>
+            <nav className='higmenu'>
+              <div className='opn-mn'>
+                <p onClick={()=>setMenuHide(!menuHide)}><HiOutlineMenu/></p>
+              </div>
+                {
+                  menuHide?
+                  <div className='btns-col'>
+                      <button onClick={handleAbout_usClick}>درباره‌ی ما</button >
+                      <button onClick={handleProductsClick}>محصولات</button >
+                      <a href="/services">خدمـات</a>
+                      <a href="/solutions">راه حل ها</a>
+                      <a href="/machinery">ماشین آلات</a>
+                      <button onClick={handleContact_us}>تماس با ما</button >
+                  </div>
+                  :null
+                }
+
+            </nav>
+
             <a href='/'><img src={'/logoPersian.svg'} alt="راسا پلیمر"></img></a>
         </header>
     )
