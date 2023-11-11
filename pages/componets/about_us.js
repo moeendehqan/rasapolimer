@@ -17,6 +17,7 @@ export default function About_us(){
                         <p>راساپلیمر در بازار بین‌المللی به کشورهای ترکیه، ارمنستان، آذربایجان، قطر، عراق، عمان، ترکمنستان، گرجستان و پاکستان صادرات عمده دارد</p>
                         <p>Export Products To: Turkey, Armenia, Azerbaijan, Iraq, Qatar, Oman, Pakistan, Georgia, Turkmenistan, ...</p>
                         <img src="/flags.svg" alt="پرچم ها"></img>
+                        <img src="image/flag 2.png" alt="پرچم ها"></img>
                     </div>
                 </section>
                 <img  src="/image/About.png" alt="نمای کارخانه"></img>

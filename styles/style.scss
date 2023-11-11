@@ -182,9 +182,12 @@ main{
                 color: $colorWithe1;
                 font-size: 14pt;
             }
-            img{
+            :nth-child(3){
                 background: $colorWithe2;
                 width: 100%;
+            }
+            :nth-child(4){
+                display: none;
             }
         }
     }
@@ -368,6 +371,7 @@ main{
     section{
         display: flex;
         flex-direction: column;
+        align-items: center;
         width: 1100px;
         margin: 25px;
         .formCntinr{
@@ -432,6 +436,7 @@ main{
             border: 1px rgba(#000000,0.3) solid;
             border-radius: 10px;
             z-index: 2;
+            width: 85%;
         }
     }
     footer{
@@ -602,6 +607,7 @@ main{
 
 .minicms{
     background: $colorTosi2;
+
     .hd{
         height: 120px;
         display: flex;
@@ -1442,6 +1448,7 @@ footer{
     }
     .contact_us{
         section{
+            width: 900px;
             .formCntinr{
                 justify-content: space-around;
                 form{
@@ -1498,7 +1505,6 @@ footer{
 
 
 @media screen and (max-width: 850px) {
-
     header{
         .higmenu{
             height: 100;
@@ -1560,10 +1566,13 @@ footer{
 
     }
     .PgImgGrdnt{
+        margin: 0px;
+        padding: 0px;
         >img{
             display: none;
         }
         section{
+            padding: 50px 0px 0px 0px;
             .contentTwoCulomn{
                 flex-direction: column-reverse;
                 >img{
@@ -1576,7 +1585,38 @@ footer{
                     background: transparent;
                     >div{
                         flex-direction: column;
+                        align-items: center;
+                        margin-top: -50px;
+                        p{
+                            margin: 0px;
+                        }
                     }
+                }
+            }
+            .exportContent{
+                background-image: url('../public/image/006 1.png');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                width: 100%;
+                display: flex;
+                padding: 40px 0px 50px 0px;
+                flex-direction: column;
+                align-items: center;
+                p{
+                    background: $colorWithe2;
+                    color: $colorBlackDeep;
+                    width: 70%;
+                    font-size: 14pt;
+                    padding: 10px;
+                }
+                :nth-child(2) ,:nth-child(3){
+                    display: none;
+                }
+                :nth-child(4){
+                    display: flex;
+                    width: 65%;
+                    margin-top: 30px;
                 }
             }
         }
@@ -1604,6 +1644,16 @@ footer{
             width: 65% !important;
             justify-content: space-between !important;
             margin: 10px 0px !important;
+        }
+    }
+    .continertContentCms{
+        .contentWide{
+            display: none !important;
+        }
+        .contentCenter{
+            p{
+                width: 250px !important;
+            }
         }
     }
     .services{

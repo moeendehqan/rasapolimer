@@ -164,9 +164,12 @@ main {
   color: #FEFEFE;
   font-size: 14pt;
 }
-.PgImgGrdnt > section .exportContent img {
+.PgImgGrdnt > section .exportContent :nth-child(3) {
   background: rgba(255, 255, 255, 0.5019607843);
   width: 100%;
+}
+.PgImgGrdnt > section .exportContent :nth-child(4) {
+  display: none;
 }
 .PgImgGrdnt > img {
   position: absolute;
@@ -334,6 +337,7 @@ main {
 .contact_us section {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 1100px;
   margin: 25px;
 }
@@ -398,6 +402,7 @@ main {
   border: 1px rgba(0, 0, 0, 0.3) solid;
   border-radius: 10px;
   z-index: 2;
+  width: 85%;
 }
 .contact_us footer {
   height: 300px;
@@ -1312,6 +1317,9 @@ footer .infCrd .txtcnt p {
   .Product section .Card .cntxt h3 {
     font-size: 12pt;
   }
+  .contact_us section {
+    width: 900px;
+  }
   .contact_us section .formCntinr {
     justify-content: space-around;
   }
@@ -1408,8 +1416,15 @@ footer .infCrd .txtcnt p {
   .SolutionsPg {
     margin: 0px 20px;
   }
+  .PgImgGrdnt {
+    margin: 0px;
+    padding: 0px;
+  }
   .PgImgGrdnt > img {
     display: none;
+  }
+  .PgImgGrdnt section {
+    padding: 50px 0px 0px 0px;
   }
   .PgImgGrdnt section .contentTwoCulomn {
     flex-direction: column-reverse;
@@ -1425,6 +1440,37 @@ footer .infCrd .txtcnt p {
   }
   .PgImgGrdnt section .contentTwoCulomn .contentConteiner > div {
     flex-direction: column;
+    align-items: center;
+    margin-top: -50px;
+  }
+  .PgImgGrdnt section .contentTwoCulomn .contentConteiner > div p {
+    margin: 0px;
+  }
+  .PgImgGrdnt section .exportContent {
+    background-image: url("../public/image/006 1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    display: flex;
+    padding: 40px 0px 50px 0px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .PgImgGrdnt section .exportContent p {
+    background: rgba(255, 255, 255, 0.5019607843);
+    color: #222220;
+    width: 70%;
+    font-size: 14pt;
+    padding: 10px;
+  }
+  .PgImgGrdnt section .exportContent :nth-child(2), .PgImgGrdnt section .exportContent :nth-child(3) {
+    display: none;
+  }
+  .PgImgGrdnt section .exportContent :nth-child(4) {
+    display: flex;
+    width: 65%;
+    margin-top: 30px;
   }
   .hd {
     height: 100px !important;
@@ -1449,6 +1495,12 @@ footer .infCrd .txtcnt p {
     width: 65% !important;
     justify-content: space-between !important;
     margin: 10px 0px !important;
+  }
+  .continertContentCms .contentWide {
+    display: none !important;
+  }
+  .continertContentCms .contentCenter p {
+    width: 250px !important;
   }
   .services section {
     flex-direction: column;
