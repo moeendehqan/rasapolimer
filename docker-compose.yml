@@ -1,8 +1,13 @@
 version: '3.8'
 
 services:
-  app:
-    image: rasapolymer
+  rasapolymer:
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: rasapolymer
     ports:
-      - "2100:2100"
+      - "2100:2101"  # پورت لوکال:پورت داخل کانتینر
+    restart: always
+    environment:
+      - NODE_ENV=production
