@@ -6,7 +6,7 @@ WORKDIR /app
 # فقط package.json برای کش نصب‌ها
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 # کپی باقی فایل‌ها
 COPY . .
