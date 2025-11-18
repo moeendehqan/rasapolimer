@@ -37,3 +37,37 @@ jobs:
         run: |
           docker compose logs --no-color | tail -n 200
           docker compose down -v
+
+  deploy:
+    needs: build-and-up
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."
+          target: ${{ secrets.DEPLOY_PATH }}
+          overwrite: true
+          strip_components: 0
+          rm: true
+          timeout: "60s"
+
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v0.1.19
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            mkdir -p ${{ secrets.DEPLOY_PATH }}
+            cd ${{ secrets.DEPLOY_PATH }}
+            docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --build
+            docker compose ps
+            curl -fsS http://localhost:4087 || true
