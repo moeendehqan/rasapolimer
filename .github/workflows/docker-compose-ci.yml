@@ -4,6 +4,7 @@ on:
   push:
     branches: ["**"]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build-and-up:
@@ -40,7 +41,7 @@ jobs:
 
   deploy:
     needs: build-and-up
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'master')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
