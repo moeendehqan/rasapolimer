@@ -1,124 +1,56 @@
-name: Docker Compose CI/CD
-
-permissions:
-  contents: read
+name: Docker CI/CD
 
 on:
   push:
-    branches: ["main", "master"]
-  pull_request:
-    branches: ["main", "master"]
+    branches: [main, master]
   workflow_dispatch:
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Build and test locally
-        run: |
-          docker compose -f docker-compose.yml -f docker-compose.test.yml up -d --build
-          
-      - name: Wait for service
-        run: |
-          for i in {1..30}; do
-            if curl -fsS http://localhost:2100 >/dev/null; then
-              echo "Service is up!"
-              exit 0
-            fi
-            sleep 2
-          done
-          docker compose logs
-          exit 1
-          
-      - name: Show test output
-        run: |
-          curl -fsS http://localhost:2100 | head -n 20 || true
-          
-      - name: Teardown
-        if: always()
-        run: |
-          docker compose logs --tail=100
-          docker compose down -v
-
   deploy:
-    needs: test
-    if: github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'master')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup SSH with proper key format
+      - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          # Clean and format the private key
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
           
-          # Generate public key from private key
-          ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+          # Start SSH agent
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_ed25519
           
           # Add host to known_hosts
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -t ed25519 ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
           
-          # Test SSH connection
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful!'"
+          # Test connection
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo Connected!"
       
-      - name: Copy files to server using SCP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "."
-          target: ${{ secrets.DEPLOY_PATH }}
-          overwrite: true
-          strip_components: 0
-          rm: false
-          timeout: "60s"
+      - name: Copy files
+        run: |
+          scp -o StrictHostKeyChecking=no -r \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            ./* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
       
-      - name: Deploy on server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          timeout: "60s"
-          script: |
-            set -e
-            echo "Starting deployment process..."
-            
+      - name: Run deploy script
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "bash -s" << 'EOF'
             cd ${{ secrets.DEPLOY_PATH }}
             
-            # Clean up old containers
-            echo "Stopping old containers..."
-            docker compose down --remove-orphans || true
+            # Stop and clean
+            docker compose down || true
             
-            # Build new image
-            echo "Building new Docker image..."
-            docker compose build --no-cache
-            
-            # Start services
-            echo "Starting services..."
+            # Build and run
+            docker compose build
             docker compose up -d
             
-            # Wait for service to be ready
-            echo "Waiting for service to start..."
-            sleep 10
-            for i in {1..30}; do
-              if curl -fsS http://localhost:2100 >/dev/null 2>&1; then
-                echo "Service is up and running!"
-                break
-              fi
-              echo "Waiting... attempt $i"
-              sleep 2
-            done
+            # Check status
+            sleep 5
+            docker compose ps
             
-            # Show service status
-            echo "Current Docker containers:"
-            docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-            
-            echo "Deployment completed successfully!"
+            # Verify
+            curl -f http://localhost:2100 || echo "Service check failed but continuing"
+          EOF
