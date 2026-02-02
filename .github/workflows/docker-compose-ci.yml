@@ -11,81 +11,38 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup SSH with proper formatting
+      - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          
-          # ذخیره کلید SSH
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | sed 's/\\n/\n/g' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          
-          # افزودن هاست به known_hosts
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-          
-          # تست اتصال
-          echo "Testing SSH connection..."
-          ssh -i ~/.ssh/id_ed25519 \
-              -o StrictHostKeyChecking=no \
-              -o ConnectTimeout=15 \
-              ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-              "echo '✅ SSH Connection Successful!'; echo 'User: $(whoami)'; echo 'Directory: $(pwd)'; echo 'Checking /var/www/rasapolymer...'; ls -la /var/www/rasapolymer 2>/dev/null || echo 'Directory not found'"
       
-      - name: Create deployment directory on server
+      - name: Prepare and deploy
         run: |
-          # ایجاد دایرکتوری اگر وجود ندارد
-          ssh -i ~/.ssh/id_ed25519 \
-              -o StrictHostKeyChecking=no \
-              ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-              "mkdir -p /var/www/rasapolymer && chmod 755 /var/www/rasapolymer && echo '✅ Directory created: /var/www/rasapolymer'"
-      
-      - name: Transfer files to server using rsync
-        run: |
-          # استفاده از rsync برای انتقال مستقیم فایل‌ها
-          echo "Syncing files to server..."
-          
+          # انتقال فایل‌ها
+          echo "📤 Copying files to server..."
           rsync -avz -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
             --exclude='.git' \
             --exclude='node_modules' \
             --exclude='.github' \
             --exclude='*.log' \
-            --exclude='deploy.tar.gz' \
-            --exclude='.env' \
             --delete \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/rasapolymer/
+            ./ root@${{ secrets.SSH_HOST }}:/var/www/rasapolymer/
           
-          echo "✅ Files synced successfully!"
-      
-      - name: Deploy Docker containers
-        run: |
-          # اجرای مستقیم دستورات روی سرور
+          echo "🚀 Deploying on server..."
+          
+          # استفاده از single quotes برای heredoc و escaping صحیح
           ssh -i ~/.ssh/id_ed25519 \
               -o StrictHostKeyChecking=no \
-              ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'DEPLOYEOF'
+              root@${{ secrets.SSH_HOST }} '
             set -e
-            echo "🚀 Starting deployment process..."
+            echo "Starting deployment..."
             
-            # رفتن به دایرکتوری
             cd /var/www/rasapolymer
-            echo "📋 Current directory: \$(pwd)"
-            echo "📁 Directory contents:"
+            echo "Current directory: $(pwd)"
+            echo "Directory contents:"
             ls -la
-            
-            # بررسی وجود فایل‌های ضروری
-            if [ ! -f "docker-compose.yml" ]; then
-              echo "❌ docker-compose.yml not found!"
-              echo "Available files:"
-              find . -type f -name "*.yml" -o -name "*.yaml"
-              exit 1
-            fi
-            
-            if [ ! -f "Dockerfile" ]; then
-              echo "⚠️ Dockerfile not found, but continuing..."
-            fi
-            
-            echo "🐳 Checking Docker..."
-            docker --version
             
             # بررسی docker compose
             if docker compose version >/dev/null 2>&1; then
@@ -95,130 +52,40 @@ jobs:
               COMPOSE_CMD="docker-compose"
               echo "Using: docker-compose"
             else
-              echo "❌ docker compose not found!"
+              echo "Error: docker compose not found!"
               exit 1
             fi
             
-            echo "📦 Building Docker image..."
-            \$COMPOSE_CMD build --no-cache
+            echo "Building Docker image..."
+            $COMPOSE_CMD build --no-cache
             
-            echo "🛑 Stopping old containers..."
-            \$COMPOSE_CMD down --remove-orphans --timeout 30 || true
+            echo "Stopping old containers..."
+            $COMPOSE_CMD down --remove-orphans --timeout 30 2>/dev/null || true
             
-            echo "▶️ Starting new containers..."
-            \$COMPOSE_CMD up -d
+            echo "Starting new containers..."
+            $COMPOSE_CMD up -d
             
-            echo "⏳ Waiting for services to start..."
-            sleep 20
+            echo "Waiting for service..."
+            sleep 25
             
-            # بررسی سلامت سرویس
-            echo "🏥 Health check..."
-            MAX_RETRIES=25
-            SERVICE_UP=false
-            
-            for i in \$(seq 1 \$MAX_RETRIES); do
+            # Health check
+            echo "Health check..."
+            MAX_RETRIES=30
+            for i in $(seq 1 $MAX_RETRIES); do
               if curl -s -f http://localhost:2100 >/dev/null 2>&1; then
-                echo "✅ Service is healthy! (Attempt \$i/\$MAX_RETRIES)"
-                SERVICE_UP=true
-                
-                echo "📊 Service response (first 100 chars):"
-                curl -s -m 5 http://localhost:2100 | head -c 100 2>/dev/null || echo "No content"
+                echo "Service is healthy! (Attempt $i/$MAX_RETRIES)"
+                echo "Service response:"
+                curl -s -m 5 http://localhost:2100 | head -c 50 2>/dev/null || echo "No content"
                 echo ""
-                
                 break
               fi
-              
-              echo "⏳ Waiting for service... (\$i/\$MAX_RETRIES)"
-              sleep 4
+              echo "Waiting for service... ($i/$MAX_RETRIES)"
+              sleep 3
             done
             
-            if [ "\$SERVICE_UP" = "false" ]; then
-              echo "⚠️ Service health check failed after \$MAX_RETRIES attempts"
-              echo "📜 Container logs:"
-              \$COMPOSE_CMD logs --tail=50 2>/dev/null || echo "Could not retrieve logs"
-              
-              echo "🐳 Docker containers:"
-              docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-              
-              # خروجی با خطا نیست، فقط هشدار می‌دهیم
-              echo "⚠️ Continuing despite health check failure..."
-            fi
-            
-            # پاکسازی
-            echo "🧹 Cleaning up old resources..."
-            docker system prune -f 2>/dev/null || true
-            
-            echo "📈 Final deployment status:"
-            \$COMPOSE_CMD ps 2>/dev/null || docker ps --filter "name=rasapolymer"
+            echo "Final status:"
+            $COMPOSE_CMD ps 2>/dev/null || docker ps
             
             echo ""
-            echo "🎉 Deployment process completed!"
-            echo "📊 Summary:"
-            echo "  - Directory: /var/www/rasapolymer"
-            echo "  - Internal URL: http://localhost:2100"
-            echo "  - External URL: http://\$(curl -s ifconfig.me):2100"
-            echo "  - Server IP: \$(hostname -I | awk '{print \$1}')"
-          DEPLOYEOF
-      
-      - name: Verify deployment
-        run: |
-          echo "🔍 Verifying deployment..."
-          
-          # صبر برای راه‌اندازی
-          sleep 30
-          
-          # تست خارجی
-          echo "=== External verification ==="
-          MAX_ATTEMPTS=12
-          EXTERNAL_SUCCESS=false
-          
-          for i in \$(seq 1 \$MAX_ATTEMPTS); do
-            echo "External attempt \$i/\$MAX_ATTEMPTS..."
-            if curl -s -f --max-time 30 "http://${{ secrets.SSH_HOST }}:2100" >/dev/null 2>&1; then
-              echo "✅ External verification successful!"
-              EXTERNAL_SUCCESS=true
-              echo "Service is accessible from internet"
-              curl -s -m 10 "http://${{ secrets.SSH_HOST }}:2100" | head -3 2>/dev/null || true
-              break
-            fi
-            sleep 5
-          done
-          
-          if [ "\$EXTERNAL_SUCCESS" = "false" ]; then
-            echo "⚠️ Could not verify externally after \$MAX_ATTEMPTS attempts"
-            
-            # بررسی از طریق SSH
-            echo ""
-            echo "=== Internal check via SSH ==="
-            ssh -i ~/.ssh/id_ed25519 \
-                -o StrictHostKeyChecking=no \
-                ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'INTERNALEOF'
-              echo "Checking from inside the server..."
-              
-              echo "1. Docker status:"
-              docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | grep -E "(rasapolymer|2100)" || echo "No matching containers"
-              
-              echo ""
-              echo "2. Service check:"
-              if curl -s -f --max-time 10 http://localhost:2100 >/dev/null; then
-                echo "✅ Service is running internally"
-                echo "Response headers:"
-                curl -s -I -m 5 http://localhost:2100 2>/dev/null | head -5 || echo "No headers"
-              else
-                echo "❌ Service not responding internally"
-                echo "Container logs (last 10 lines):"
-                docker logs --tail=10 \$(docker ps -q --filter "name=rasapolymer" | head -1) 2>/dev/null || echo "No logs"
-              fi
-              
-              echo ""
-              echo "3. Port check:"
-              netstat -tulpn | grep :2100 || echo "Nothing listening on port 2100"
-            INTERNALEOF
-            
-            echo ""
-            echo "💡 Possible solutions:"
-            echo "1. Check if port 2100 is open: sudo ufw allow 2100"
-            echo "2. Check firewall on server"
-            echo "3. Verify docker container is running: docker ps"
-            echo "4. Check container logs: docker logs [container-name]"
-          fi
+            echo "Deployment completed!"
+          '
