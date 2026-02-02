@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  rasapolymer:
+    ports:
+      - "2100:2101"
+    environment:
+      - NODE_ENV=test

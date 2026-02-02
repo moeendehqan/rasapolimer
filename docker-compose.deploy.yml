@@ -2,4 +2,18 @@ version: '3.8'
 
 services:
   rasapolymer:
-    image: ${IMAGE}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rasapolymer_production
+    ports:
+      - "2100:2101"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

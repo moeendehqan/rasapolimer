@@ -7,7 +7,10 @@ services:
       dockerfile: Dockerfile
     container_name: rasapolymer
     ports:
-      - "2100:2101"  # پورت لوکال:پورت داخل کانتینر
-    restart: always
+      - "2100:2101"
+    restart: unless-stopped
     environment:
       - NODE_ENV=production
+    volumes:
+      - ./logs:/app/logs
+      - ./uploads:/app/uploads
