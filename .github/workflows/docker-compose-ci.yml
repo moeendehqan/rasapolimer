@@ -50,55 +50,75 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup SSH
+      - name: Setup SSH with proper key format
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          # Clean and format the private key
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          
+          # Generate public key from private key
+          ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+          
+          # Add host to known_hosts
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          
+          # Test SSH connection
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful!'"
       
-      - name: Copy files to server
-        run: |
-          rsync -avz --delete \
-            --exclude='.git' \
-            --exclude='node_modules' \
-            --exclude='.github' \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.DEPLOY_PATH }}/
+      - name: Copy files to server using SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."
+          target: ${{ secrets.DEPLOY_PATH }}
+          overwrite: true
+          strip_components: 0
+          rm: false
+          timeout: "60s"
       
-      - name: Build and deploy on server
-        run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          timeout: "60s"
+          script: |
             set -e
+            echo "Starting deployment process..."
+            
             cd ${{ secrets.DEPLOY_PATH }}
             
-            # Stop and remove old containers
+            # Clean up old containers
+            echo "Stopping old containers..."
             docker compose down --remove-orphans || true
             
-            # Clean old images to save space
-            docker system prune -f || true
-            
-            # Build new image locally on server
-            docker compose -f docker-compose.yml -f docker-compose.deploy.yml build --no-cache
+            # Build new image
+            echo "Building new Docker image..."
+            docker compose build --no-cache
             
             # Start services
-            docker compose -f docker-compose.yml -f docker-compose.deploy.yml up -d
+            echo "Starting services..."
+            docker compose up -d
             
             # Wait for service to be ready
-            sleep 5
-            for i in \$(seq 1 30); do
-              if curl -fsS http://localhost:2100 >/dev/null; then
-                echo 'Service started successfully!'
+            echo "Waiting for service to start..."
+            sleep 10
+            for i in {1..30}; do
+              if curl -fsS http://localhost:2100 >/dev/null 2>&1; then
+                echo "Service is up and running!"
                 break
               fi
+              echo "Waiting... attempt $i"
               sleep 2
             done
             
             # Show service status
-            docker compose ps
-            echo 'Deployment completed!'
-          "
-      
-      - name: Verify deployment
-        run: |
-          sleep 10
-          curl -fsS http://${{ secrets.SSH_HOST }}:2100 || true
+            echo "Current Docker containers:"
+            docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+            
+            echo "Deployment completed successfully!"
